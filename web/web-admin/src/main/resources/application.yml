@@ -19,3 +19,9 @@ spring:
 mybatis-plus:
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+#  global-config:
+#    db-config:
+#      logic-delete-field: is_delete  #对应数据库中表示逻辑删除的字段
+#      logic-delete-value: 1  #表示逻辑删除成功的值
+#      logic-not-delete-value: 0  #表示逻辑未删除的值
