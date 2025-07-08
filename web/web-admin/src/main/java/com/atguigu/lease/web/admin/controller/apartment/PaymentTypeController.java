@@ -24,7 +24,7 @@ public class PaymentTypeController {
     @Operation(summary = "查询全部支付方式列表")
     @GetMapping("list")
     public Result<List<PaymentType>> listPaymentType() {
-        //TODO 查询全部支付方式的方法实现
+        //TODO 查询全部支付方式列表
         //用service的list方法直接查询
         //
         //存在问题：要过滤逻辑删除字段为 1 的数据
