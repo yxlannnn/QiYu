@@ -33,6 +33,8 @@ public class LabelController {
         return Result.ok(list);
     }
 
+
+    //TODO @RequestBody注解是将前端传过来的请求体中的json字符串反序列化成参数所需的对象，枚举类型需要在属性上标记注解进行自动转换
     @Operation(summary = "新增或修改标签信息")
     @PostMapping("saveOrUpdate")
     public Result saveOrUpdateLabel(@RequestBody LabelInfo labelInfo) {

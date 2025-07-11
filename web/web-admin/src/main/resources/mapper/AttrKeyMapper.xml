@@ -3,5 +3,34 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.atguigu.lease.web.admin.mapper.AttrKeyMapper">
+<!--    TODO 关联多表查询语句，以及查询结果的映射-->
+<!--    映射resultMap中主键字段用id标签，普通字段用result标签，一对一用association标签，一对多用collection字段-->
 
+    <resultMap id="AttrKeyVoMap" type="com.atguigu.lease.web.admin.vo.attr.AttrKeyVo">
+
+        <id property="id" column="id"/>
+        <result property="name" column="name"/>
+        <collection property="attrValueList" ofType="com.atguigu.lease.model.entity.AttrValue">
+            <id property="id" column="attr_value_id"/>
+            <result property="name" column="attr_value_name"/>
+            <result property="attrKeyId" column="attr_key_id"/>
+        </collection>
+
+    </resultMap>
+
+
+<!--    TODO 多表关联查询 以及两个表的逻辑删除值不一样导致的问题以及解决方法-->
+<!--    使用左外连接，并在连接条件on后加上 “and右表的逻辑删除值为0”-->
+    <select id="listAttrInfo" resultMap="AttrKeyVoMap">
+        select k.id,
+               k.name,
+               v.id   attr_value_id,
+               v.name attr_value_name,
+               v.attr_key_id
+        from attr_key k
+                 left join attr_value v
+                           on k.id = v.attr_key_id and v.is_deleted = 0
+        where k.is_deleted = 0
+
+    </select>
 </mapper>

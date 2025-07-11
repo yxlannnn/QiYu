@@ -13,4 +13,5 @@ public class AttrKeyVo extends AttrKey {
 
     @Schema(description = "属性value列表")
     private List<AttrValue> attrValueList;
+
 }
