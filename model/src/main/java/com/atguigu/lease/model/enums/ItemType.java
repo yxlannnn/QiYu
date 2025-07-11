@@ -11,6 +11,9 @@ public enum ItemType implements BaseEnum {
     ROOM(2, "房间");
 
 
+    //TODO JsonValue EnumValue
+    //JsonValue注解是jackson提供的，作用是自动将枚举类类进行json序列化传给前端
+    //EnumValue注解是MybatisPlus提供的，作用是将枚举类自动转换为数据库所需要的类型
     @EnumValue
     @JsonValue
     private Integer code;
