@@ -30,11 +30,7 @@ public class FileServiceImpl implements FileService {
     @Override
     public String upload(MultipartFile file) throws ServerException, InsufficientDataException, ErrorResponseException, IOException, NoSuchAlgorithmException, InvalidKeyException, InvalidResponseException, XmlParserException, InternalException {
         //TODO 设置文件上传的方法实现 重点！！！
-
         //TODO 异常处理：如果minio服务停止了，文件上传异常处理方法
-
-
-
 
         //判断桶是否存在
             boolean bucketExists = minioClient.bucketExists(BucketExistsArgs
