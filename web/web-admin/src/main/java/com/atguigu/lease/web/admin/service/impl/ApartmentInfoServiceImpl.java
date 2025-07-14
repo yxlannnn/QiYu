@@ -2,16 +2,19 @@ package com.atguigu.lease.web.admin.service.impl;
 
 import com.atguigu.lease.model.entity.*;
 import com.atguigu.lease.model.enums.ItemType;
-import com.atguigu.lease.web.admin.mapper.ApartmentInfoMapper;
+import com.atguigu.lease.web.admin.mapper.*;
 import com.atguigu.lease.web.admin.service.*;
+import com.atguigu.lease.web.admin.vo.apartment.ApartmentDetailVo;
 import com.atguigu.lease.web.admin.vo.apartment.ApartmentItemVo;
 import com.atguigu.lease.web.admin.vo.apartment.ApartmentQueryVo;
 import com.atguigu.lease.web.admin.vo.apartment.ApartmentSubmitVo;
+import com.atguigu.lease.web.admin.vo.fee.FeeValueVo;
 import com.atguigu.lease.web.admin.vo.graph.GraphVo;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
@@ -28,9 +31,25 @@ import java.util.List;
 public class ApartmentInfoServiceImpl extends ServiceImpl<ApartmentInfoMapper, ApartmentInfo>
         implements ApartmentInfoService {
 
+
+    //mapper类
     @Autowired
     private ApartmentInfoMapper apartmentInfoMapper;
 
+    @Autowired
+    private GraphInfoMapper graphInfoMapper;
+
+    @Autowired
+    private LabelInfoMapper labelInfoMapper;
+
+    @Autowired
+    private FacilityInfoMapper facilityInfoMapper;
+
+    @Autowired
+    private FeeValueMapper feeValueMapper;
+
+
+    //service类
     @Autowired
     private GraphInfoService graphInfoService;
 
@@ -134,6 +153,37 @@ public class ApartmentInfoServiceImpl extends ServiceImpl<ApartmentInfoMapper, A
     public IPage<ApartmentItemVo> pageItem(Page<ApartmentItemVo> page, ApartmentQueryVo queryVo) {
 
        return apartmentInfoMapper.pageItem(page,queryVo);
+    }
+
+    @Override
+    public ApartmentDetailVo getDetailById(Long id) {
+        //TODO 查询公寓信息详情
+        //1.查询公寓信息
+        ApartmentInfo apartmentInfo = apartmentInfoMapper.selectById(id);
+
+        //2.查询图片列表
+        List<GraphVo> graphVoList = graphInfoMapper.selectListByItemTypeAndId(ItemType.APARTMENT, id);
+
+        //3.查询标签列表
+        List<LabelInfo> labelInfoList = labelInfoMapper.selectListByItemTypeAndId(id);
+
+        //4.查询配套列表
+        List<FacilityInfo> facilityInfoList =  facilityInfoMapper.selectListByApartmentId(id);
+
+        //5.查询杂费列表
+        List<FeeValueVo> feeValueVoList = feeValueMapper.selectListByApartmentId(id);
+
+        //6.组装结果
+        ApartmentDetailVo adminApartmentDetailVo = new ApartmentDetailVo();
+
+        BeanUtils.copyProperties(apartmentInfo, adminApartmentDetailVo);
+        adminApartmentDetailVo.setGraphVoList(graphVoList);
+        adminApartmentDetailVo.setLabelInfoList(labelInfoList);
+        adminApartmentDetailVo.setFacilityInfoList(facilityInfoList);
+        adminApartmentDetailVo.setFeeValueVoList(feeValueVoList);
+
+        return adminApartmentDetailVo;
+
     }
 }
 
