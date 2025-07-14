@@ -35,6 +35,7 @@ public class ApartmentController {
         //TODO 保存或更新公寓信息（复杂点！！！）Service层的实现代码较多
         service.saveOrUpdateApartment(apartmentSubmitVo);
         return Result.ok();
+
     }
 
     @Operation(summary = "根据条件分页查询公寓列表")
@@ -53,7 +54,9 @@ public class ApartmentController {
     @Operation(summary = "根据ID获取公寓详细信息")
     @GetMapping("getDetailById")
     public Result<ApartmentDetailVo> getDetailById(@RequestParam Long id) {
-        return Result.ok();
+        ApartmentDetailVo result = service.getDetailById(id);
+
+        return Result.ok(result);
     }
 
     @Operation(summary = "根据id删除公寓信息")
