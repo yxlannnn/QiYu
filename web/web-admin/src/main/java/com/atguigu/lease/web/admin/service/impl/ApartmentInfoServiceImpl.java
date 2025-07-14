@@ -182,6 +182,7 @@ public class ApartmentInfoServiceImpl extends ServiceImpl<ApartmentInfoMapper, A
         adminApartmentDetailVo.setFacilityInfoList(facilityInfoList);
         adminApartmentDetailVo.setFeeValueVoList(feeValueVoList);
 
+
         return adminApartmentDetailVo;
 
     }
