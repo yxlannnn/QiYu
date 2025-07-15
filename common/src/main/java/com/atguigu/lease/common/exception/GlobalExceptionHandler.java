@@ -20,9 +20,26 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(Exception.class)
     @ResponseBody
     public Result handle( Exception e){
+
+        e.getMessage();
         e.printStackTrace();
 
 
         return Result.fail();
     }
+
+
+    //TODO 这里的LeaseException也是Exception的子类，如果发生这个异常该走哪个方法？
+    //规则是：谁更精确就走哪个方法
+    @ExceptionHandler(LeaseException.class)
+    @ResponseBody
+    public Result handle(LeaseException e){
+
+        e.printStackTrace();
+
+
+        return Result.fail(e.getCode(),e.getMessage());
+    }
+
+
 }
