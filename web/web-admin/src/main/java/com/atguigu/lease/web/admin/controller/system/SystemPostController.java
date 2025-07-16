@@ -18,7 +18,9 @@ import java.util.List;
 @RestController
 @Tag(name = "后台用户岗位管理")
 @RequestMapping("/admin/system/post")
+//post：岗位
 public class SystemPostController {
+
 
     @Autowired
     private SystemPostService service;
@@ -49,7 +51,7 @@ public class SystemPostController {
     @DeleteMapping("deleteById")
     @Operation(summary = "根据id删除岗位")
     public Result removeById(@RequestParam Long id) {
-        //TODO 根据id删除岗位
+        //TODO 根据id删除岗位 优化：可以跟删除公寓信息一样判断岗位删除后，该岗位下的员工是否删除
         service.removeById(id);
 
 
