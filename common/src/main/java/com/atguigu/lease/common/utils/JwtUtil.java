@@ -1,7 +1,8 @@
 package com.atguigu.lease.common.utils;
 
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
+import com.atguigu.lease.common.exception.LeaseException;
+import com.atguigu.lease.common.result.ResultCodeEnum;
+import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;
 
 import javax.crypto.SecretKey;
@@ -27,5 +28,30 @@ public class JwtUtil {
     }
 
     //TODO 解析token的方法
+    public static void parseToken(String token){
+
+        //先判断token是否为空
+        if (token == null){
+            throw new LeaseException(ResultCodeEnum.ADMIN_LOGIN_AUTH);
+        }
+
+        try{
+            JwtParser jwtParser = Jwts.parserBuilder().setSigningKey(secretKey).build();
+            //解析方法如果抛异常，说明token解析有问题，直接抛出catch中的异常
+            jwtParser.parseClaimsJws(token);
+        }catch (ExpiredJwtException e){
+            throw new LeaseException(ResultCodeEnum.TOKEN_EXPIRED);
+
+        }catch (JwtException e){
+            throw new LeaseException(ResultCodeEnum.TOKEN_INVALID);
+
+        }
+
+    }
+
+    //TODO 不过期token生成！！！可以用这个方法，修改一下上面的过期时间，在360000后面*24*365L就可以生成一个一年不过期的token
+    public static void main(String[] args) {
+        System.out.println(createToken(2L,"user"));
+    }
 
 }
