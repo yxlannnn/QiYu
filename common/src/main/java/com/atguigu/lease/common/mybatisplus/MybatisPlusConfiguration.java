@@ -10,7 +10,7 @@ import org.springframework.context.annotation.Configuration;
 
 
 //包扫描放在了启动类上
-//@MapperScan("com.atguigu.lease.web.*.mapper")
+@MapperScan("com.atguigu.lease.web.*.mapper")
 @Configuration
 public class MybatisPlusConfiguration {
 
