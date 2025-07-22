@@ -28,7 +28,7 @@ public class JwtUtil {
     }
 
     //TODO 解析token的方法
-    public static void parseToken(String token){
+    public static Claims parseToken(String token){
 
         //先判断token是否为空
         if (token == null){
@@ -38,7 +38,9 @@ public class JwtUtil {
         try{
             JwtParser jwtParser = Jwts.parserBuilder().setSigningKey(secretKey).build();
             //解析方法如果抛异常，说明token解析有问题，直接抛出catch中的异常
-            jwtParser.parseClaimsJws(token);
+            //jws是指的带有签名的jwt
+            Jws<Claims> claimsJws = jwtParser.parseClaimsJws(token);
+            return claimsJws.getBody();
         }catch (ExpiredJwtException e){
             throw new LeaseException(ResultCodeEnum.TOKEN_EXPIRED);
 
