@@ -36,3 +36,7 @@ build/
 
 ### Mac OS ###
 .DS_Store
+
+
+# 忽略指定路径的 application.yml 文件
+/src/main/resources/application.yml

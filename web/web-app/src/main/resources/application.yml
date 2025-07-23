@@ -25,3 +25,5 @@ mybatis-plus:
 
 springdoc:
   default-flat-param-object: true
+
+#阿里短信服务配置
