@@ -11,6 +11,7 @@ import com.atguigu.lease.web.app.mapper.UserInfoMapper;
 import com.atguigu.lease.web.app.service.LoginService;
 import com.atguigu.lease.web.app.service.SmsService;
 import com.atguigu.lease.web.app.vo.user.LoginVo;
+import com.atguigu.lease.web.app.vo.user.UserInfoVo;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -109,5 +110,13 @@ public class LoginServiceImpl implements LoginService {
 
         //登陆成功返回一个token
         return JwtUtil.createToken(userInfo.getId(),userInfo.getPhone());
+    }
+
+    @Override
+    public UserInfoVo getLoginUserById(Long userId) {
+        UserInfo userInfo = userInfoMapper.selectById(userId);
+        UserInfoVo userInfoVo = new UserInfoVo(userInfo.getNickname(), userInfo.getAvatarUrl());
+
+        return userInfoVo;
     }
 }

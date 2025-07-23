@@ -53,7 +53,7 @@ public class JwtUtil {
 
     //TODO 不过期token生成！！！可以用这个方法，修改一下上面的过期时间，在360000后面*24*365L就可以生成一个一年不过期的token
     public static void main(String[] args) {
-        System.out.println(createToken(2L,"user"));
+        System.out.println(createToken(8L,"17715251226"));
     }
 
 }
