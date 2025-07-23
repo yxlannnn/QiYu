@@ -6,6 +6,7 @@ import com.atguigu.lease.web.app.vo.room.RoomQueryVo;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import org.apache.ibatis.annotations.Mapper;
 
 import java.math.BigDecimal;
 
@@ -15,7 +16,12 @@ import java.math.BigDecimal;
 * @createDate 2023-07-26 11:12:39
 * @Entity com.atguigu.lease.model.entity.RoomInfo
 */
+@Mapper
 public interface RoomInfoMapper extends BaseMapper<RoomInfo> {
 
     IPage<RoomItemVo> pageItem(Page<RoomItemVo> page, RoomQueryVo queryVo);
+
+    BigDecimal selectMinRentByApartmentId(Long id);
+
+    IPage<RoomItemVo> pageItemByApartmentId(Page<RoomItemVo> page, Long id);
 }
