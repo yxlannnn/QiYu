@@ -3,6 +3,7 @@ package com.atguigu.lease.web.app.mapper;
 import com.atguigu.lease.model.entity.ViewAppointment;
 import com.atguigu.lease.web.app.vo.appointment.AppointmentItemVo;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
 
@@ -12,8 +13,11 @@ import java.util.List;
 * @createDate 2023-07-26 11:12:39
 * @Entity com.atguigu.lease.model.entity.ViewAppointment
 */
+
+@Mapper
 public interface ViewAppointmentMapper extends BaseMapper<ViewAppointment> {
 
+    List<AppointmentItemVo> listItemByUserId(Long userId);
 }
 
 
