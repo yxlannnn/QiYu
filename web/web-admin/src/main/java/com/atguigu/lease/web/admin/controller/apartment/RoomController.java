@@ -28,10 +28,10 @@ public class RoomController {
     @Autowired
     private RoomInfoService service;
 
+    //TODO 为了保证缓存一致性，需要优化这个方法
     @Operation(summary = "保存或更新房间信息")
     @PostMapping("saveOrUpdate")
     public Result saveOrUpdate(@RequestBody RoomSubmitVo roomSubmitVo) {
-
         service.saveOrUpdateRoom(roomSubmitVo);
         return Result.ok();
     }
@@ -53,6 +53,7 @@ public class RoomController {
 
     }
 
+    //TODO 为了保证缓存一致性，需要优化这个方法
     @Operation(summary = "根据id删除房间信息")
     @DeleteMapping("removeById")
     public Result removeById(@RequestParam Long id) {

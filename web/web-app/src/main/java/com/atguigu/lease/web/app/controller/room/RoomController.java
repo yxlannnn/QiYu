@@ -35,6 +35,8 @@ public class RoomController {
         return Result.ok(result);
     }
 
+
+    //TODO ！！！使用redis进行接口优化
     @Operation(summary = "根据id获取房间的详细信息")
     @GetMapping("getDetailById")
     public Result<RoomDetailVo> getDetailById(@RequestParam Long id) {
