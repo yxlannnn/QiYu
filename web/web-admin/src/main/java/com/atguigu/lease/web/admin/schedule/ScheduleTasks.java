@@ -22,6 +22,7 @@ public class ScheduleTasks {
     private LeaseAgreementService service;
 
     //TODO 定时任务中的corn表达式的应用！！！
+    //这里表示每天的0点检查租约状态
     @Scheduled(cron = "0 0 0 * * *")
     public void checkLeaseStatus(){
         //updateWrapper中的le方法是小于等于

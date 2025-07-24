@@ -1,9 +1,11 @@
 package com.atguigu.lease.web.app.service.impl;
 
+import com.atguigu.lease.common.login.LoginUserHolder;
 import com.atguigu.lease.model.entity.*;
 import com.atguigu.lease.model.enums.ItemType;
 import com.atguigu.lease.web.app.mapper.*;
 import com.atguigu.lease.web.app.service.ApartmentInfoService;
+import com.atguigu.lease.web.app.service.BrowsingHistoryService;
 import com.atguigu.lease.web.app.service.GraphInfoService;
 import com.atguigu.lease.web.app.service.RoomInfoService;
 import com.atguigu.lease.web.app.vo.apartment.ApartmentItemVo;
@@ -52,6 +54,8 @@ public class RoomInfoServiceImpl extends ServiceImpl<RoomInfoMapper, RoomInfo>
     private FeeValueMapper feeValueMapper;
     @Autowired
     private ApartmentInfoService apartmentInfoService;
+    @Autowired
+    private BrowsingHistoryService browsingHistoryService;
 
 
 
@@ -96,6 +100,23 @@ public class RoomInfoServiceImpl extends ServiceImpl<RoomInfoMapper, RoomInfo>
         roomDetailVo.setPaymentTypeList(paymentTypeList);
         roomDetailVo.setFeeValueVoList(feeValueVoList);
         roomDetailVo.setLeaseTermList(leaseTermList);
+
+        System.out.println(Thread.currentThread().getName());
+
+        //｜
+        //｜
+        //｜
+        //｜->开启一个新线程执行将查询记录保存到历史记录
+        //｜
+        //V
+        //（主线程）
+        //TODO 保存浏览历史
+        //TODO ！！！！异步操作：实现查询房间信息和保存房间信息到历史记录异步执行
+        //执行到这一步的时候开启一个新线程
+        //方法：在saveHistory方法上加入一个@Async注解，并在启动类上加上@EanbleAsync注解
+        browsingHistoryService.saveHistory(LoginUserHolder.getLoginUser().getUserId(),id);
+
+
 
         return roomDetailVo;
     }
