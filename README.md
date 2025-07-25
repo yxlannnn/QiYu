@@ -1,5 +1,7 @@
 # 栖寓
-<image src="https://github.com/yxlannnn/QiYu/blob/main/web/QiYulog.png"/>
+  <p align="center">
+    <image src="https://github.com/yxlannnn/QiYu/blob/main/web/QiYulog.png" width="500" height="500"/>
+  <p/>
 ## 项目介绍
 栖寓是一个基于Spring Boot的房屋租赁管理平台，提供了房源管理、租赁合同管理、预约看房、用户管理等功能。系统分为管理端（Admin）和用户端（App）两个子系统，实现了房屋租赁全流程的线上化管理。
 
