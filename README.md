@@ -2,7 +2,9 @@
   <p align="center">
     <image src="https://github.com/yxlannnn/QiYu/blob/main/web/QiYulog.png" width="500" height="500"/>
   <p/>
+    
 ## 项目介绍
+    
 栖寓是一个基于Spring Boot的房屋租赁管理平台，提供了房源管理、租赁合同管理、预约看房、用户管理等功能。系统分为管理端（Admin）和用户端（App）两个子系统，实现了房屋租赁全流程的线上化管理。
 
 ## 技术栈
@@ -43,17 +45,14 @@ SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 - web/web-admin/src/main/resources/application.yml
 - web/web-app/src/main/resources/application.yml
+
 主要配置项：
 
 ```
 # 数据库配置
 spring:
   datasource:
-    url: jdbc:mysql://localhost:3306/
-    lease?useUnicode=true&
-    characterEncoding=utf-8&useSSL=false&
-    allowPublicKeyRetrieval=true&
-    serverTimezone=GMT%2b8
+    url: jdbc:mysql://localhost:3306/lease?useUnicode=true&characterEncoding=utf-8&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=GMT%2b8
     username: root
     password: your_password
 
@@ -75,8 +74,7 @@ minio:
 aliyun:
   sms:
     access-key-id: your_access_key_id
-    access-key-secret: 
-    your_access_key_secret
+    access-key-secret: your_access_key_secret
     endpoint: dysmsapi.aliyuncs.com
 ```
 
@@ -87,16 +85,5 @@ aliyun:
   - 管理端： http://localhost:8080/doc.html
   - 用户端： http://localhost:8081/doc.html
 
-## 贡献指南
-1. 
-   Fork本仓库
-2. 
-   创建您的特性分支 ( git checkout -b feature/amazing-feature )
-3. 
-   提交您的更改 ( git commit -m 'Add some amazing feature' )
-4. 
-   推送到分支 ( git push origin feature/amazing-feature )
-5. 
-   打开一个Pull Request
 ## 许可证
 MIT License
